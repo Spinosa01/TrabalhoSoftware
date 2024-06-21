@@ -28,10 +28,10 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="../emprestimo/index">Emprestimo</a>
         </li>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+      </ul>
+      <button class="btn btn-outline-danger pull-left position-absolute end-0" onclick="location.href='<?php echo base_url('login/logout') ?>'">
+          <i class="fas fa-sign-out-alt"></i> Sair
+        </button>
     </div>
   </div>
 </nav>

@@ -40,18 +40,19 @@ class Emprestimo extends BaseController
      public function cadastrar(){ 
         $emprestimo = $this->request->getPost();
         $this->emprestimoModel->save($emprestimo);
+        $this->livroModel->update($emprestimo['id_livro'],['disponivel' => 0]);
         return redirect()->to('Emprestimo/index');
     }
      
     //faz com que o emprestimo possa editar os dados do emprestimo e utiliza a variavel $dados para receber os dados do emprestimo e pode-lo editar
     public function editar($id){
         $dados = $this->emprestimoModel->find($id);
+        $this->livroModel->update($dados['id_livro'],['disponivel' => 1]);
         $alunos = $this->alunoModel->find();
         $usuarios = $this->usuarioModel->find();
         $livros = $this->livroModel->find();
         $obra = $this->obraModel->find();
         echo view('_partials/header');
-        echo view('_partials/navbar');
         echo view('emprestimo/edit',[
             'emprestimo' => $dados,
             'listaLivros'=>$livros,
@@ -66,8 +67,22 @@ class Emprestimo extends BaseController
     //salva os dados editados do emprestimo
     public function salvar(){
         $emprestimo = $this->request->getPost();
+        $this->livroModel->update($emprestimo['id_livro'],['disponivel' => 0]);
         $this->emprestimoModel->save($emprestimo);
         return redirect()->to('emprestimo/index');
+    }
+    public function salvardev(){
+        $emprestimo = $this->request->getPost();
+        $this->livroModel->update($emprestimo['id_livro'],['disponivel' => 1]);
+        $this->emprestimoModel->save($emprestimo);
+        return redirect()->to('emprestimo/index');
+    }
+    public function devolucao($id){
+        $emprestimo = $this->emprestimoModel->find($id);
+        echo view('_partials/header');
+        echo view('_partials/navbar');
+        echo view('devolucao/index',['Emprestimo' => $emprestimo]);
+        echo view('_partials/footer');
     }
     
     //exclui o emprestimo

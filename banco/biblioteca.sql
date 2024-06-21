@@ -55,7 +55,7 @@ CREATE TABLE emprestimo
  id INT PRIMARY KEY AUTO_INCREMENT,  
  data_inicio INT NOT NULL,  
  data_fim INT NOT NULL,  
- data_prazo INT NOT NULL,  
+ prazo INT NOT NULL,  
  id_livro INT,  
  id_usuario INT,  
  id_aluno INT,
